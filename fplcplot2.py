@@ -1,6 +1,6 @@
 #!/usr/bin/python
 """ Script to play open an FPLC data file and plot UV280
-    Usage: $ ./fplcplot1 [file]
+    Usage: $ ./fplcplot2 [file]
 	 Note: input files must be tab delimited """
 
 import fileinput
@@ -28,13 +28,19 @@ for line in fileinput.input():
 
 #Plotting the data
 import matplotlib.pyplot as plt
+
+# Normalize Baseline
+#for i in range(0,len(mau)-1): 
+#	mau[i] -= 6.5
+
 ylimit = max(mau)*1.1
 plt.xlim(min(ml), max(ml))
 plt.ylim(min(mau),ylimit)
-plt.xlabel('mL')
+plt.ylim(min(mau),ylimit)
 plt.ylabel('mAu')
 #plt.title('FPLC Trace')
 plt.plot(ml, mau)
 plt.grid(True)
+#plt.xticks(range(25))
 plt.show()
 #plt.savefig('fplcplot.png')
